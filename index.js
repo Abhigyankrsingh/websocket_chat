@@ -1,23 +1,23 @@
 const http = require("http");
 const express = require("express");
-const path = require('path');
+const path = require("path");
 const { Server } = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-io.on('connection', (socket) => {
+// Socket.io
+io.on("connection", (socket) => {
   socket.on("user-message", (message) => {
-    console.log("A new User Message", message);
-    io.emit("chat-message", message); // Broadcasting the message to all connected clients
+    io.emit("message", message);
   });
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.resolve("./public")));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get("/", (req, res) => {
+  return res.sendFile("/public/index.html");
 });
 
-server.listen(9000, () => console.log('Server Started at: 9000'));
+server.listen(9000, () => console.log(`Server Started at PORT:9000`));
