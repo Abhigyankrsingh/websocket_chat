@@ -15,6 +15,15 @@
    <script>
      function createConnection(){
      const socker = io();
+     const sendBtn = document.getElementById("sendBtn");
+     const messegeInput = document.getElementById("messege");
+
+    sendBtn.addEventListener("click", (e)=>{
+      const messege  = messegeInput.value;
+      console.log(messege);
+      
+    })
+
      }
    </script>
 </body>
